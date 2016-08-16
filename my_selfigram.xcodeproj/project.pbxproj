@@ -15,6 +15,7 @@
 		322BD34F1D503948004D5BAD /* my_selfigramTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 322BD34E1D503948004D5BAD /* my_selfigramTests.swift */; };
 		322BD35A1D503948004D5BAD /* my_selfigramUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 322BD3591D503948004D5BAD /* my_selfigramUITests.swift */; };
 		3238AF031D597CF300443D5B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3238AF021D597CF300443D5B /* ProfileViewController.swift */; };
+		326FB56F1D62B06A0017B820 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326FB56E1D62B06A0017B820 /* FeedViewController.swift */; };
 		32C8853C1D5C263600D05E36 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C8853B1D5C263600D05E36 /* User.swift */; };
 		32C8853E1D5C270B00D05E36 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C8853D1D5C270B00D05E36 /* Post.swift */; };
 /* End PBXBuildFile section */
@@ -51,6 +52,7 @@
 		322BD3591D503948004D5BAD /* my_selfigramUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = my_selfigramUITests.swift; sourceTree = "<group>"; };
 		322BD35B1D503948004D5BAD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3238AF021D597CF300443D5B /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		326FB56E1D62B06A0017B820 /* FeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		32C8853B1D5C263600D05E36 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		32C8853D1D5C270B00D05E36 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -105,6 +107,7 @@
 			children = (
 				322BD3391D503948004D5BAD /* AppDelegate.swift */,
 				322BD33B1D503948004D5BAD /* ViewController.swift */,
+				326FB56E1D62B06A0017B820 /* FeedViewController.swift */,
 				3238AF021D597CF300443D5B /* ProfileViewController.swift */,
 				322BD33D1D503948004D5BAD /* Main.storyboard */,
 				32C8853B1D5C263600D05E36 /* User.swift */,
@@ -269,6 +272,7 @@
 				3238AF031D597CF300443D5B /* ProfileViewController.swift in Sources */,
 				322BD33C1D503948004D5BAD /* ViewController.swift in Sources */,
 				322BD33A1D503948004D5BAD /* AppDelegate.swift in Sources */,
+				326FB56F1D62B06A0017B820 /* FeedViewController.swift in Sources */,
 				32C8853E1D5C270B00D05E36 /* Post.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
