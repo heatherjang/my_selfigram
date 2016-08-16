@@ -17,11 +17,11 @@ class FeedViewController: UITableViewController {
         super.viewDidLoad()
         
         let heather = User(username: "heather", profileImage: UIImage(named: "Grumpy-Cat")!)
-        let post0 = Post(image: heather.profileImage, user: heather, comment: "You can read minds?")
-        let post1 = Post(image: heather.profileImage, user: heather, comment: "What's up, Doc?")
-        let post2 = Post(image: heather.profileImage, user: heather, comment: "What is this, a school for ants?")
-        let post3 = Post(image: heather.profileImage, user: heather, comment: "Heather's school for kids who don't read good")
-        let post4 = Post(image: heather.profileImage, user: heather, comment: "I want a hippopotamus for Christmas.")
+        let post0 = Post(image: UIImage(named: "Grumpy-Cat")!, user: heather, comment: "You can read minds?")
+        let post1 = Post(image: UIImage(named: "Grumpy-Cat")!, user: heather, comment: "What's up, Doc?")
+        let post2 = Post(image: UIImage(named: "Grumpy-Cat")!, user: heather, comment: "What is this, a school for ants?")
+        let post3 = Post(image: UIImage(named: "Grumpy-Cat")!, user: heather, comment: "Heather's school for kids who don't read good")
+        let post4 = Post(image: UIImage(named: "Grumpy-Cat")!, user: heather, comment: "I want a hippopotamus for Christmas.")
         
         posts = [post0, post1, post2, post3, post4]
         
