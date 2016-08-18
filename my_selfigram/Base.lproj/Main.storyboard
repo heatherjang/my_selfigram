@@ -3,24 +3,60 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Feed View Controller-->
         <scene sceneID="BZO-Fp-kwU">
             <objects>
                 <tableViewController id="gCO-nE-EtF" customClass="FeedViewController" customModule="my_selfigram" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="hqw-wc-qMe">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="320" sectionHeaderHeight="28" sectionFooterHeight="28" id="hqw-wc-qMe">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="postCell" id="nfr-pn-c0S">
-                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="postCell" rowHeight="320" id="nfr-pn-c0S" customClass="SelfieCell" customModule="my_selfigram" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="92" width="600" height="320"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nfr-pn-c0S" id="9bR-NV-nty">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="319.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="g0e-CT-4bw">
+                                            <rect key="frame" x="8" y="8" width="584" height="250"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="250" id="tko-Et-Gxl"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="comment" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="egf-wh-7Gg">
+                                            <rect key="frame" x="8" y="295" width="73" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zEn-kM-4aj">
+                                            <rect key="frame" x="8" y="266" width="76" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="zEn-kM-4aj" firstAttribute="leading" secondItem="9bR-NV-nty" secondAttribute="leadingMargin" id="3mx-h6-qEI"/>
+                                        <constraint firstItem="egf-wh-7Gg" firstAttribute="leading" secondItem="9bR-NV-nty" secondAttribute="leadingMargin" id="BVo-vG-LuS"/>
+                                        <constraint firstItem="g0e-CT-4bw" firstAttribute="leading" secondItem="9bR-NV-nty" secondAttribute="leadingMargin" id="Vii-ge-Jgb"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="g0e-CT-4bw" secondAttribute="trailing" id="eVq-ts-ONA"/>
+                                        <constraint firstItem="egf-wh-7Gg" firstAttribute="top" secondItem="zEn-kM-4aj" secondAttribute="bottom" constant="8" id="h98-al-HLm"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="g0e-CT-4bw" secondAttribute="bottom" constant="53.5" id="vBp-zx-JbK"/>
+                                        <constraint firstItem="zEn-kM-4aj" firstAttribute="top" secondItem="g0e-CT-4bw" secondAttribute="bottom" constant="8" id="wjD-ae-se6"/>
+                                        <constraint firstItem="g0e-CT-4bw" firstAttribute="top" secondItem="9bR-NV-nty" secondAttribute="topMargin" id="yeQ-YO-BP5"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="commentLabel" destination="egf-wh-7Gg" id="BwN-Oe-aan"/>
+                                    <outlet property="selfieImageView" destination="g0e-CT-4bw" id="bpO-6p-bx3"/>
+                                    <outlet property="usernameLabel" destination="zEn-kM-4aj" id="OC6-nO-ilS"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -28,11 +64,18 @@
                             <outlet property="delegate" destination="gCO-nE-EtF" id="D7F-2P-rXI"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="bMA-Lt-7br"/>
+                    <navigationItem key="navigationItem" id="bMA-Lt-7br">
+                        <barButtonItem key="rightBarButtonItem" systemItem="camera" id="Eao-48-JET">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="cameraButtonPressed:" destination="gCO-nE-EtF" id="0bP-kS-38f"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TcP-HI-sS9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1934" y="-364"/>
+            <point key="canvasLocation" x="1922" y="-498"/>
         </scene>
         <!--Table View Controller-->
         <scene sceneID="e1K-cc-LB2">
