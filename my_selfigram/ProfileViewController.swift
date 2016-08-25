@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Parse
 
 class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
@@ -46,11 +47,34 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         //    This dictionary contains multiple things that maybe useful to us.
         //    We are getting an image from the UIImagePickerControllerOriginalImage key in that dictionary
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            
-            //2. To our imageView, we set the image property to be the image the user has chosen
-            profileImageView.image = image
-            
+            // setting the compression quality to 90%
+            if  let imageData = UIImageJPEGRepresentation(image, 0.9),
+                let imageFile = PFFile(data: imageData),
+                let user      = PFUser.currentUser(){
+                    // avatarImage is a new column in our User table
+                    user["avatarImage"] = imageFile
+                    user.saveInBackgroundWithBlock({ (success, error) in
+                        if success {
+                            // Show uploaded image as profile picture
+                            let image = UIImage(data: imageData)
+                            self.profileImageView.image = image
+                        }
+                    })
+                }
         }
+        
+        
+        
+        
+        
+//        
+//        
+//        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+//            
+//            //2. To our imageView, we set the image property to be the image the user has chosen
+//            profileImageView.image = image
+//            
+//        }
         
         //3. We remember to dismiss the Image Picker from our screen.
         dismissViewControllerAnimated(true, completion: nil)
@@ -65,12 +89,45 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
 
         // Do any additional setup after loading the view.
     }
-
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        // Ensure user == currentUser
+        guard let user = PFUser.currentUser() else {
+            return
+        }
+        // Set usernameLabel to currentUser username
+        usernameLabel.text = user.username
+        
+        // Ensure imageFile == currentUser.avatarImage
+        guard let imageFile = user["avatarImage"] as? PFFile else {
+            return
+        }
+        // Set profileImageView to currentUser avatar
+        imageFile.getDataInBackgroundWithBlock{ (data, error) in
+            if let imageData = data {
+                self.profileImageView.image = UIImage(data: imageData)
+            }
+        }
+        
+        
+//        if let user = PFUser.currentUser(){
+//            usernameLabel.text = user.username
+//            if let imageFile = user["avatarImage"] as? PFFile {
+//                imageFile.getDataInBackgroundWithBlock{ (data, error) in
+//                    if let imageData = data {
+//                        self.profileImageView.image = UIImage(data: imageData)
+//                    }
+//                }
+//            }
+//        }
+    }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 
     /*
     // MARK: - Navigation

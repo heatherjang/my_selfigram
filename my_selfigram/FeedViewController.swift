@@ -36,7 +36,7 @@ class FeedViewController: UITableViewController,UIImagePickerControllerDelegate,
                         let secret   = photo["secret"] as? String {
                         
                         let photoUrlString = "https://farm\(farmID).staticflickr.com/\(serverId)/\(photoId)_\(secret).jpg"
-                        if let photoUrl = NSURL(string: photoUrlString){
+                        if let photoUrl = NSURL(string: photoUrlString) {
                             let user = User(username: "Heather", profileImage: UIImage(named: "Grumpy-Cat")!)
                             let post = Post(image: photoUrl, user: user, comment: "Some Dog from Flickr")
                             self.posts.append(post)
@@ -158,11 +158,13 @@ class FeedViewController: UITableViewController,UIImagePickerControllerDelegate,
 //        // 1. When the delegate method is returned, it passes along a dictionary called info.
 //        //    This dictionary contains multiple things that maybe useful to us.
 //        //    We are getting an image from the UIImagePickerControllerOriginalImage key in that dictionary
+//        
 //        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
 //            
 //            //2. We create a Post object from the image
-//            let me = User(username: "Eunice", profileImage: UIImage(named: "Grumpy-Cat")!)
-//            let post = Post(image: image, user: me, comment: "This is the same selfie as everyone else")
+//            let user = User(username: "Eunice", profileImage: UIImage(named: "Grumpy-Cat")!)
+//            
+//            let post = Post(image: image, user: user, comment: "This is the same selfie as everyone else")
 //
 //            //3. Add post to our posts array
 //            //    Adds it to the very top of our array

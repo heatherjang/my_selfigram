@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Parse
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,7 +16,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        // Initialize Parse
+        Parse.setApplicationId("PnsHfng7VD1VsN2hNwzpp8VqaNVNLLcoy4Xdiryp",
+                               clientKey: "1EdHWcLFrs1NmU6jk7ckV0l6W6ocNgblw6j8LTf3")
+        
+        let user     = PFUser()
+        let username = "heather"
+        let password = "test"
+        user.username = username
+        user.password = password
+        user.signUpInBackgroundWithBlock{ (success, error) in
+            if success {
+                print("Successfully signed up user")
+            } else {
+                PFUser.logInWithUsernameInBackground(username, password: password, block: { (user, error) in
+                    if let user = user {
+                        print("Successfully logged in \(user)")
+                    }
+                })
+            }
+        }
+        
+        
+//        // Testing SDK Connection
+//        let testObject = PFObject(className: "TestObject")
+//        testObject["foo"] = "bar"
+//        testObject.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
+//            if success {
+//                print("Object has been saved.")
+//            }
+//        }
+
         return true
     }
 
