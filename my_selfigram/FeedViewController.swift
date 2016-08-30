@@ -7,77 +7,28 @@
 //
 
 import UIKit
+import Parse
 
 class FeedViewController: UITableViewController,UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     var posts: [Post] = []
-    
-    let searchTag = "puppies"
-    let flickrApiKey = "d3b64787397f7fabc91f2b9b8992f719"
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let flickrApiUrl = "https://www.flickr.com/services/rest/?method=flickr.photos.search&format=json&nojsoncallback=1&api_key=\(flickrApiKey)&tags=\(searchTag)"
-        
-        
-        let task = NSURLSession.sharedSession().dataTaskWithURL(NSURL(string: flickrApiUrl)!) { (data, response, error) in
-            
-            // convert NSData to JSON
-            if let jsonUnformatted = try? NSJSONSerialization.JSONObjectWithData(data!, options: []),
-                let json = jsonUnformatted as? [String: AnyObject],
-                let photosDictionary = json["photos"] as? [String: AnyObject],
-                let photosArray = photosDictionary["photo"] as? [[String: AnyObject]]
-            {
-                for photo in photosArray {
-                    if  let farmID   = photo["farm"] as? Int,
-                        let serverId = photo["server"] as? String,
-                        let photoId  = photo["id"] as? String,
-                        let secret   = photo["secret"] as? String {
-                        
-                        let photoUrlString = "https://farm\(farmID).staticflickr.com/\(serverId)/\(photoId)_\(secret).jpg"
-                        if let photoUrl = NSURL(string: photoUrlString) {
-                            let user = User(username: "Heather", profileImage: UIImage(named: "Grumpy-Cat")!)
-                            let post = Post(image: photoUrl, user: user, comment: "Some Dog from Flickr")
-                            self.posts.append(post)
-                        }
-                    }
-                    
-                    // We use dispatch_async because we need update all UI elements on the main thread.
-                    // This is a rule and you will see this again whenever you are updating UI.
-                    
-                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                        self.tableView.reloadData()
-                    })
-                    
-                
+        if let query = Post.query(){
+            query.orderByDescending("createdAt")
+            query.includeKey("user")
+            query.findObjectsInBackgroundWithBlock { (data, error) in
+                guard let posts = data as? [Post] else {
+                    return
                 }
-            } else {
-                print("error with response data")
+                self.posts = posts
+                self.tableView.reloadData()
             }
-            
+        
         }
         
-        // this is called to start (or restart, if needed) our task
-        task.resume()
-        
-        print ("outside dataTaskWithURL")
-        
-        
-//        let heather = User(username: "heather", profileImage: UIImage(named: "Grumpy-Cat")!)
-//        let post0 = Post(image: UIImage(named: "Grumpy-Cat")!, user: heather, comment: "You can read minds?")
-//        let post1 = Post(image: UIImage(named: "Grumpy-Cat")!, user: heather, comment: "What's up, Doc?")
-//        let post2 = Post(image: UIImage(named: "Grumpy-Cat")!, user: heather, comment: "What is this, a school for ants?")
-//        let post3 = Post(image: UIImage(named: "Grumpy-Cat")!, user: heather, comment: "Heather's school for kids who don't read good")
-//        let post4 = Post(image: UIImage(named: "Grumpy-Cat")!, user: heather, comment: "I want a hippopotamus for Christmas.")
-//        
-//        posts = [post0, post1, post2, post3, post4]
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
     override func didReceiveMemoryWarning() {
@@ -104,24 +55,18 @@ class FeedViewController: UITableViewController,UIImagePickerControllerDelegate,
         let cell = tableView.dequeueReusableCellWithIdentifier("postCell", forIndexPath: indexPath) as! SelfieCell
         let post = posts[indexPath.row]
         
-        let task = NSURLSession.sharedSession().downloadTaskWithURL(post.image) { (url, response, error) -> Void in
-            if  let image = url,
-                let imageData = NSData(contentsOfURL: image)
-            {
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    
+        cell.commentLabel.text     = post.comment
+        cell.usernameLabel.text    = post.user.username
+        
+        // Unpack image PFFile to be read as UIImage
+        if let imageFile = post.image as? PFFile {
+            // Set profileImageView to currentUser avatar
+            imageFile.getDataInBackgroundWithBlock{ (data, error) in
+                if let imageData = data {
                     cell.selfieImageView.image = UIImage(data: imageData)
-                    
-                })
-                
+                }
             }
         }
-        
-        task.resume()
-
-        cell.commentLabel.text = post.comment
-        cell.usernameLabel.text = post.user.username
-        
 
         return cell
     }
@@ -155,12 +100,36 @@ class FeedViewController: UITableViewController,UIImagePickerControllerDelegate,
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         
-//        // 1. When the delegate method is returned, it passes along a dictionary called info.
-//        //    This dictionary contains multiple things that maybe useful to us.
-//        //    We are getting an image from the UIImagePickerControllerOriginalImage key in that dictionary
-//        
-//        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
-//            
+        // 1. When the delegate method is returned, it passes along a dictionary called info.
+        //    This dictionary contains multiple things that maybe useful to us.
+        //    We are getting an image from the UIImagePickerControllerOriginalImage key in that dictionary
+        
+        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            
+            if  let imageData      = UIImageJPEGRepresentation(image, 0.9),
+                let imageFile      = PFFile(data: imageData),
+                let user           = PFUser.currentUser(),
+                let comment:String = "This is a selfie"
+            {
+                // Initialize new post after image picking done
+                let post = Post.init(image: imageFile, user: user, comment: comment)
+                
+                // Save new selfie
+                post.saveInBackgroundWithBlock{ (success, error) in
+                    if success {
+                        print("Saved to Parse!")
+                        
+                        // Insert new selfie at index 0
+                        self.posts.insert(post, atIndex: 0)
+                        
+                        // Show new selfie with animation
+                        let indexPath = NSIndexPath(forRow: 0, inSection: 0)
+                        self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+                    }
+                }
+            
+            }
+            
 //            //2. We create a Post object from the image
 //            let user = User(username: "Eunice", profileImage: UIImage(named: "Grumpy-Cat")!)
 //            
@@ -169,14 +138,14 @@ class FeedViewController: UITableViewController,UIImagePickerControllerDelegate,
 //            //3. Add post to our posts array
 //            //    Adds it to the very top of our array
 //            posts.insert(post, atIndex: 0)
-//            
-//        }
-//        
-//        //4. We remember to dismiss the Image Picker from our screen.
-//        dismissViewControllerAnimated(true, completion: nil)
-//        
-//        //5. Now that we have added a post, reload our table
-//        tableView.reloadData()
+            
+        }
+        
+        //4. We remember to dismiss the Image Picker from our screen.
+        dismissViewControllerAnimated(true, completion: nil)
+        
+        //5. Now that we have added a post, reload our table
+        tableView.reloadData()
 
     }
 

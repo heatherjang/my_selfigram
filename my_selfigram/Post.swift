@@ -8,15 +8,24 @@
 
 import Foundation
 import UIKit
+import Parse
 
-class Post {
-    let image: NSURL
-    let user: User
-    let comment: String
+class Post: PFObject, PFSubclassing {
+    @NSManaged var image:PFFile
+    @NSManaged var user:PFUser
+    @NSManaged var comment:String
+
+    static func parseClassName() -> String {
+        // Name of Parse table to be called
+        return "Post"
+    }
     
-    init(image: NSURL, user: User, comment: String){
+    // Convenience builds ON TOP of super, rather than override
+    convenience init(image:PFFile, user:PFUser, comment:String) {
+        self.init()
         self.image = image
-        self.user = user
+        self.user  = user
         self.comment = comment
     }
+    
 }

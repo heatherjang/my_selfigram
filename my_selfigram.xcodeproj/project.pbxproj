@@ -17,6 +17,7 @@
 		322BD35A1D503948004D5BAD /* my_selfigramUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 322BD3591D503948004D5BAD /* my_selfigramUITests.swift */; };
 		3238AF031D597CF300443D5B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3238AF021D597CF300443D5B /* ProfileViewController.swift */; };
 		326FB56F1D62B06A0017B820 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326FB56E1D62B06A0017B820 /* FeedViewController.swift */; };
+		32BFE4FC1D7523ED0053B123 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32BFE4FB1D7523ED0053B123 /* Activity.swift */; };
 		32C8853C1D5C263600D05E36 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C8853B1D5C263600D05E36 /* User.swift */; };
 		32C8853E1D5C270B00D05E36 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C8853D1D5C270B00D05E36 /* Post.swift */; };
 		32FB807A1D6559360071EBC4 /* SelfieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32FB80791D6559360071EBC4 /* SelfieCell.swift */; };
@@ -56,6 +57,7 @@
 		322BD35B1D503948004D5BAD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3238AF021D597CF300443D5B /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		326FB56E1D62B06A0017B820 /* FeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
+		32BFE4FB1D7523ED0053B123 /* Activity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
 		32C8853B1D5C263600D05E36 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		32C8853D1D5C270B00D05E36 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		32FB80791D6559360071EBC4 /* SelfieCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelfieCell.swift; sourceTree = "<group>"; };
@@ -146,6 +148,7 @@
 		326FB5701D62B9FF0017B820 /* models */ = {
 			isa = PBXGroup;
 			children = (
+				32BFE4FB1D7523ED0053B123 /* Activity.swift */,
 				32C8853B1D5C263600D05E36 /* User.swift */,
 				32C8853D1D5C270B00D05E36 /* Post.swift */,
 			);
@@ -368,6 +371,7 @@
 				322BD33C1D503948004D5BAD /* ViewController.swift in Sources */,
 				322BD33A1D503948004D5BAD /* AppDelegate.swift in Sources */,
 				326FB56F1D62B06A0017B820 /* FeedViewController.swift in Sources */,
+				32BFE4FC1D7523ED0053B123 /* Activity.swift in Sources */,
 				32C8853E1D5C270B00D05E36 /* Post.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
