@@ -11,9 +11,16 @@ import UIKit
 import Parse
 
 class Post: PFObject, PFSubclassing {
+
     @NSManaged var image:PFFile
     @NSManaged var user:PFUser
     @NSManaged var comment:String
+    
+    var likes: PFRelation! {
+        // PFRelation is a “computed property” (value is computed every time instead of stored)
+        // Line below pecifies that our relation column should be called “likes”
+        return relationForKey("likes")
+    }
 
     static func parseClassName() -> String {
         // Name of Parse table to be called

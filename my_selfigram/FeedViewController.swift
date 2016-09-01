@@ -55,18 +55,7 @@ class FeedViewController: UITableViewController,UIImagePickerControllerDelegate,
         let cell = tableView.dequeueReusableCellWithIdentifier("postCell", forIndexPath: indexPath) as! SelfieCell
         let post = posts[indexPath.row]
         
-        cell.commentLabel.text     = post.comment
-        cell.usernameLabel.text    = post.user.username
-        
-        // Unpack image PFFile to be read as UIImage
-        if let imageFile = post.image as? PFFile {
-            // Set profileImageView to currentUser avatar
-            imageFile.getDataInBackgroundWithBlock{ (data, error) in
-                if let imageData = data {
-                    cell.selfieImageView.image = UIImage(data: imageData)
-                }
-            }
-        }
+        cell.post = post
 
         return cell
     }
@@ -129,15 +118,6 @@ class FeedViewController: UITableViewController,UIImagePickerControllerDelegate,
                 }
             
             }
-            
-//            //2. We create a Post object from the image
-//            let user = User(username: "Eunice", profileImage: UIImage(named: "Grumpy-Cat")!)
-//            
-//            let post = Post(image: image, user: user, comment: "This is the same selfie as everyone else")
-//
-//            //3. Add post to our posts array
-//            //    Adds it to the very top of our array
-//            posts.insert(post, atIndex: 0)
             
         }
         

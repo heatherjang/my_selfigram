@@ -68,6 +68,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="commentLabel" destination="egf-wh-7Gg" id="BwN-Oe-aan"/>
+                                    <outlet property="likeButton" destination="Rfy-38-NtH" id="ujo-Ae-m8W"/>
                                     <outlet property="selfieImageView" destination="g0e-CT-4bw" id="bpO-6p-bx3"/>
                                     <outlet property="usernameLabel" destination="zEn-kM-4aj" id="OC6-nO-ilS"/>
                                 </connections>

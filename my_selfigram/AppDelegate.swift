@@ -18,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Tell Parse to convert any "Post" PFObjects to "Post" objects
         Post.registerSubclass()
+        Activity.registerSubclass()
 
         // Initialize Parse
         Parse.setApplicationId("PnsHfng7VD1VsN2hNwzpp8VqaNVNLLcoy4Xdiryp",
