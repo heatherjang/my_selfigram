@@ -12,23 +12,42 @@ import Parse
 class FeedViewController: UITableViewController,UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     var posts: [Post] = []
-
+    
+    // Get posts and refresh table
+    func getPosts() {
+        guard let query = Post.query() else {
+            return
+        }
+        query.orderByDescending("createdAt")
+        query.includeKey("user")
+        query.findObjectsInBackgroundWithBlock { (data, error) in
+            guard let posts = data as? [Post] else {
+                return
+            }
+            self.posts = posts
+            self.tableView.reloadData()
+            
+            // remove the spinning circle if needed
+            self.refreshControl?.endRefreshing()
+        }
+    }
+    // Gesture: double tap selfie
+    @IBAction func doubleTappedSelfie(sender: UITapGestureRecognizer) {
+        // get the location (x,y) position on our tableView where we have clicked
+        let tapLocation = sender.locationInView(tableView)
+        // based on the x, y position get the indexPath of where we tapped
+        
+        if let indexPathAtTapLocation = tableView.indexPathForRowAtPoint(tapLocation){
+            // based on the indexPath we can get the specific cell that is being tapped
+            let cell = tableView.cellForRowAtIndexPath(indexPathAtTapLocation) as! SelfieCell
+            //run a method on that cell.
+            cell.tapAnimation()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        if let query = Post.query(){
-            query.orderByDescending("createdAt")
-            query.includeKey("user")
-            query.findObjectsInBackgroundWithBlock { (data, error) in
-                guard let posts = data as? [Post] else {
-                    return
-                }
-                self.posts = posts
-                self.tableView.reloadData()
-            }
-        
-        }
-        
+        getPosts()
     }
 
     override func didReceiveMemoryWarning() {
@@ -39,12 +58,10 @@ class FeedViewController: UITableViewController,UIImagePickerControllerDelegate,
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        
         return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
         return posts.count
     }
 
@@ -54,14 +71,12 @@ class FeedViewController: UITableViewController,UIImagePickerControllerDelegate,
         // I want to use a cell in the reuse pool with the given identifier
         let cell = tableView.dequeueReusableCellWithIdentifier("postCell", forIndexPath: indexPath) as! SelfieCell
         let post = posts[indexPath.row]
-        
         cell.post = post
 
         return cell
     }
 
     @IBAction func cameraButtonPressed(sender: AnyObject) {
-        
         // 1: Create an ImagePickerController
         let pickerController = UIImagePickerController()
         
@@ -82,13 +97,11 @@ class FeedViewController: UITableViewController,UIImagePickerControllerDelegate,
             pickerController.cameraDevice = .Front
             pickerController.cameraCaptureMode = .Photo
         }
-        
         // Preset the pickerController on screen
         self.presentViewController(pickerController, animated: true, completion: nil)
     }
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
-        
         // 1. When the delegate method is returned, it passes along a dictionary called info.
         //    This dictionary contains multiple things that maybe useful to us.
         //    We are getting an image from the UIImagePickerControllerOriginalImage key in that dictionary
@@ -128,7 +141,20 @@ class FeedViewController: UITableViewController,UIImagePickerControllerDelegate,
         tableView.reloadData()
 
     }
-
+    
+    // Refreshing feed
+    @IBAction func refreshPulled(sender: UIRefreshControl) {
+        getPosts()
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {

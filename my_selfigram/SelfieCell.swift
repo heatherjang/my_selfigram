@@ -15,6 +15,7 @@ class SelfieCell: UITableViewCell {
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var commentLabel: UILabel!
     @IBOutlet weak var likeButton: UIButton!
+    @IBOutlet weak var heartAnimationView: UIImageView!
     
     var post:Post? {
         // didSet is run when post variable set in FeedViewController
@@ -138,6 +139,28 @@ class SelfieCell: UITableViewCell {
                 }
             }
         }
+    }
+    
+    let animationDuration = 1.0
+    let animationDelay = 0.0
+    
+    func tapAnimation() {
+        // set heartAnimationView to be very tiny and not hidden
+        self.heartAnimationView.hidden = false
+        self.heartAnimationView.transform = CGAffineTransformMakeScale(0, 0)
+        
+        UIView.animateWithDuration(animationDuration, delay: animationDelay, options: [], animations: { () -> Void in
+            
+            // transfor, heartAnimationView to be 3X larger
+            self.heartAnimationView.transform = CGAffineTransformMakeScale(3, 3)
+            
+        }) { (success) -> Void in
+            
+            // when animation is complete set heartAnimationView to be hidden
+            self.heartAnimationView.hidden = true
+        }
+        // Update parse to like post
+        likeButtonClicked(likeButton)
     }
 
 }

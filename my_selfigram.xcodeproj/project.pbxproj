@@ -20,6 +20,8 @@
 		32BFE4FC1D7523ED0053B123 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32BFE4FB1D7523ED0053B123 /* Activity.swift */; };
 		32C8853C1D5C263600D05E36 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C8853B1D5C263600D05E36 /* User.swift */; };
 		32C8853E1D5C270B00D05E36 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C8853D1D5C270B00D05E36 /* Post.swift */; };
+		32EEEEAD1D7E5E7C002BAFC4 /* ActivityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32EEEEAC1D7E5E7C002BAFC4 /* ActivityCell.swift */; };
+		32EEEEB11D7E5F75002BAFC4 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32EEEEB01D7E5F75002BAFC4 /* ActivityViewController.swift */; };
 		32FB807A1D6559360071EBC4 /* SelfieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32FB80791D6559360071EBC4 /* SelfieCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -60,6 +62,8 @@
 		32BFE4FB1D7523ED0053B123 /* Activity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
 		32C8853B1D5C263600D05E36 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		32C8853D1D5C270B00D05E36 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		32EEEEAC1D7E5E7C002BAFC4 /* ActivityCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityCell.swift; sourceTree = "<group>"; };
+		32EEEEB01D7E5F75002BAFC4 /* ActivityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
 		32FB80791D6559360071EBC4 /* SelfieCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelfieCell.swift; sourceTree = "<group>"; };
 		5F848CC8313DEC3DF69B566D /* Pods-my_selfigram.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-my_selfigram.release.xcconfig"; path = "Pods/Target Support Files/Pods-my_selfigram/Pods-my_selfigram.release.xcconfig"; sourceTree = "<group>"; };
 		C095980BD3684961E14B0BC6 /* Pods_my_selfigram.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_my_selfigram.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -160,8 +164,10 @@
 			children = (
 				32FB80791D6559360071EBC4 /* SelfieCell.swift */,
 				326FB56E1D62B06A0017B820 /* FeedViewController.swift */,
+				32EEEEAC1D7E5E7C002BAFC4 /* ActivityCell.swift */,
 				3238AF021D597CF300443D5B /* ProfileViewController.swift */,
 				322BD33B1D503948004D5BAD /* ViewController.swift */,
+				32EEEEB01D7E5F75002BAFC4 /* ActivityViewController.swift */,
 			);
 			name = view_controllers;
 			sourceTree = "<group>";
@@ -367,6 +373,8 @@
 			files = (
 				32C8853C1D5C263600D05E36 /* User.swift in Sources */,
 				3238AF031D597CF300443D5B /* ProfileViewController.swift in Sources */,
+				32EEEEAD1D7E5E7C002BAFC4 /* ActivityCell.swift in Sources */,
+				32EEEEB11D7E5F75002BAFC4 /* ActivityViewController.swift in Sources */,
 				32FB807A1D6559360071EBC4 /* SelfieCell.swift in Sources */,
 				322BD33C1D503948004D5BAD /* ViewController.swift in Sources */,
 				322BD33A1D503948004D5BAD /* AppDelegate.swift in Sources */,
