@@ -21,9 +21,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Activity.registerSubclass()
 
         // Initialize Parse
-        Parse.setApplicationId("PnsHfng7VD1VsN2hNwzpp8VqaNVNLLcoy4Xdiryp",
-                               clientKey: "1EdHWcLFrs1NmU6jk7ckV0l6W6ocNgblw6j8LTf3")
-        
+//        Parse.setApplicationId("PnsHfng7VD1VsN2hNwzpp8VqaNVNLLcoy4Xdiryp",
+//                               clientKey: "1EdHWcLFrs1NmU6jk7ckV0l6W6ocNgblw6j8LTf3")
+        Parse.setApplicationId("5CDeHX2xNhW11QZXr9AvtBbEQY0lft4jpUuMFt9g",
+                               clientKey: "SO1UFKR9k8RsLx1FsXzBjyI6IjsKxm2K0jcm48dG")
         let user     = PFUser()
         let username = "heather"
         let password = "test"
@@ -40,16 +41,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 })
             }
         }
-        
-        
-//        // Testing SDK Connection
-//        let testObject = PFObject(className: "TestObject")
-//        testObject["foo"] = "bar"
-//        testObject.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
-//            if success {
-//                print("Object has been saved.")
-//            }
-//        }
 
         return true
     }

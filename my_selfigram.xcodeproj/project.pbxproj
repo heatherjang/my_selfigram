@@ -524,7 +524,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2888A1A94EC414EE5D0E9E78 /* Pods-my_selfigram.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				INFOPLIST_FILE = my_selfigram/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "heather.my-selfigram";
@@ -536,7 +536,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5F848CC8313DEC3DF69B566D /* Pods-my_selfigram.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				INFOPLIST_FILE = my_selfigram/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "heather.my-selfigram";
